@@ -20,12 +20,10 @@ app.use("/bookings", bookingRoutes)
 app.use("/users", userRoutes)
 
 /* MONGOOSE SETUP */
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 mongoose
   .connect(process.env.MONGO_URL, {
-    dbName: "Dream_Nest",
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+    dbName: "Dream_Nest"
   })
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));

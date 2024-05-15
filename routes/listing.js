@@ -1,20 +1,21 @@
 const router = require("express").Router();
-const multer = require("multer");
+const { storage } = require('../storage/storage');
+const multer = require('multer');
+const upload = multer({ storage });
 
 const Listing = require("../models/Listing");
 const User = require("../models/User")
 
 /* Configuration Multer for File Upload */
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/uploads/"); // Store uploaded files in the 'uploads' folder
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname); // Use the original file name
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "public/uploads/"); // Store uploaded files in the 'uploads' folder
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.originalname); // Use the original file name
+//   },
+// });
 
-const upload = multer({ storage });
 
 /* CREATE LISTING */
 router.post("/create", upload.array("listingPhotos"), async (req, res) => {
